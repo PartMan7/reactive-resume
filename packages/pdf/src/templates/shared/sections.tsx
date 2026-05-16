@@ -341,7 +341,7 @@ const ExperienceSection = ({
 							leading={
 								hasPosition || hasLocation ? (
 									<Text>
-										{hasPosition ? item.position : ""}
+										{hasPosition ? <Text style={{ fontStyle: "italic" }}>{item.position}</Text> : ""}
 										{hasPosition && hasLocation ? " " : ""}
 										{hasLocation ? `(${item.location})` : ""}
 									</Text>
@@ -363,8 +363,10 @@ const ExperienceSection = ({
 
 							{item.roles.length === 0 && (hasPosition || hasSplitRowText(headerPeriod)) && (
 								<View style={composeStyles(splitRowStyle)}>
-									{hasPosition && <Text>{item.position}</Text>}
-									{hasSplitRowText(headerPeriod) && <Text style={composeStyles(alignRightStyle)}>{headerPeriod}</Text>}
+									{hasPosition && <Text style={{ fontStyle: "italic" }}>{item.position}</Text>}
+									{hasSplitRowText(headerPeriod) && (
+										<Text style={composeStyles(alignRightStyle, { fontStyle: "italic" })}>{headerPeriod}</Text>
+									)}
 								</View>
 							)}
 						</>
@@ -374,13 +376,13 @@ const ExperienceSection = ({
 						<SectionItem key={item.id}>
 							<SectionItemHeader>{inlineItemHeader ? renderInlineHeader() : renderSplitHeader()}</SectionItemHeader>
 
-							{item.roles.length > 0 && <Text>{item.period}</Text>}
+							{item.roles.length > 0 && <Text style={{ fontStyle: "italic" }}>{item.period}</Text>}
 
 							{item.roles.map((role) => (
 								<View key={role.id}>
 									<View style={composeStyles(splitRowStyle)}>
-										<Text>{role.position}</Text>
-										<Text style={composeStyles(alignRightStyle)}>{role.period}</Text>
+										<Text style={{ fontStyle: "italic" }}>{role.position}</Text>
+										<Text style={composeStyles(alignRightStyle, { fontStyle: "italic" })}>{role.period}</Text>
 									</View>
 									<RichText>{role.description}</RichText>
 								</View>
@@ -504,7 +506,7 @@ const ProjectsSection = ({
 						<SectionItemHeader>
 							<View style={composeStyles(splitRowStyle)}>
 								<ItemTitle website={item.website}>{item.name}</ItemTitle>
-								<Text style={composeStyles(alignRightStyle)}>{item.period}</Text>
+								<Text style={composeStyles(alignRightStyle, { fontStyle: "italic" })}>{item.period}</Text>
 							</View>
 						</SectionItemHeader>
 
@@ -763,14 +765,16 @@ const VolunteerSection = ({
 									<InlineItemHeader
 										leading={hasSplitRowText(item.location) ? <Text>{item.location}</Text> : null}
 										middle={<ItemTitle website={item.website}>{item.organization}</ItemTitle>}
-										trailing={<Text style={composeStyles(alignRightStyle)}>{item.period}</Text>}
+										trailing={
+											<Text style={composeStyles(alignRightStyle, { fontStyle: "italic" })}>{item.period}</Text>
+										}
 									/>
 								) : (
 									<>
 										<View style={composeStyles(splitRowStyle)}>
 											<ItemTitle website={item.website}>{item.organization}</ItemTitle>
 											{hasSplitRowText(item.period) && (
-												<Text style={composeStyles(alignRightStyle)}>{item.period}</Text>
+												<Text style={composeStyles(alignRightStyle, { fontStyle: "italic" })}>{item.period}</Text>
 											)}
 										</View>
 
@@ -809,7 +813,7 @@ const ReferencesSection = ({
 					<SectionItem key={item.id}>
 						<SectionItemHeader>
 							<ItemTitle website={item.website}>{item.name}</ItemTitle>
-							<Text>{item.position}</Text>
+							<Text style={{ fontStyle: "italic" }}>{item.position}.</Text>
 							<Text>{item.phone}</Text>
 						</SectionItemHeader>
 						<RichText>{item.description}</RichText>
